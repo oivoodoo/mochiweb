@@ -87,24 +87,24 @@ decode(S) ->
 %% @spec binary_decoder([binary_decoder_option()]) -> function()
 %% @doc Create a binary_decoder/1 with the given options.
 binary_decoder(Options) ->
-    mochijson2:decoder(Options).
+    mochijson2_n2:decoder(Options).
 
 %% @spec binary_encoder([binary_encoder_option()]) -> function()
 %% @doc Create a binary_encoder/1 with the given options.
 binary_encoder(Options) ->
-    mochijson2:encoder(Options).
+    mochijson2_n2:encoder(Options).
 
 %% @spec binary_encode(bjson_term()) -> iolist()
 %% @doc Encode the given as JSON to an iolist, using lists for arrays and
 %%      binaries for strings.
 binary_encode(Any) ->
-    mochijson2:encode(Any).
+    mochijson2_n2:encode(Any).
 
 %% @spec binary_decode(iolist()) -> bjson_term()
 %% @doc Decode the given iolist to Erlang terms, using lists for arrays and
 %%      binaries for strings.
 binary_decode(S) ->
-    mochijson2:decode(S).
+    mochijson2_n2:decode(S).
 
 %% Internal API
 
@@ -131,7 +131,7 @@ json_encode(null, _State) ->
 json_encode(I, _State) when is_integer(I) ->
     integer_to_list(I);
 json_encode(F, _State) when is_float(F) ->
-    mochinum:digits(F);
+    mochinum_n2:digits(F);
 json_encode(L, State) when is_list(L); is_binary(L); is_atom(L) ->
     json_encode_string(L, State);
 json_encode({array, Props}, State) when is_list(Props) ->

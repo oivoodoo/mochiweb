@@ -3,7 +3,7 @@
 
 %% @doc Utilities for parsing and quoting.
 
--module(mochiweb_util).
+-module(mochiweb_util_n2).
 -author('bob@mochimedia.com').
 -export([join/2, quote_plus/1, urlencode/1, parse_qs/1, unquote/1]).
 -export([path_split/1]).
@@ -110,7 +110,7 @@ shell_quote(L) ->
     shell_quote(L, [$\"]).
 
 %% @spec cmd_port([string()], Options) -> port()
-%% @doc open_port({spawn, mochiweb_util:cmd_string(Argv)}, Options).
+%% @doc open_port({spawn, mochiweb_util_n2:cmd_string(Argv)}, Options).
 cmd_port(Argv, Options) ->
     open_port({spawn, cmd_string(Argv)}, Options).
 
@@ -177,7 +177,7 @@ quote_plus(Int) when is_integer(Int) ->
 quote_plus(Binary) when is_binary(Binary) ->
     quote_plus(binary_to_list(Binary));
 quote_plus(Float) when is_float(Float) ->
-    quote_plus(mochinum:digits(Float));
+    quote_plus(mochinum_n2:digits(Float));
 quote_plus(String) ->
     quote_plus(String, []).
 
